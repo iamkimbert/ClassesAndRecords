@@ -32,7 +32,17 @@ namespace ClassesAndRecords
                 "Roland Guijt"
                 );
 
-            classroomCourse.Name = "Another title";
+            //var name = classroomCourse.Name;
+            //var author = classroomCourse.Author;
+            //var (name, author) == classroomCourse;
+            //Console.WriteLine(name);
+            //Console.WriteLine(author);
+
+            //classroomCourse.Name = "Somethingelse";
+            //var anotherCourse = classroomCourse with { Name = "C# Getting Started" };
+
+            //var title = classroomCourse.GetTitle();
+            var (name, author) = classroomCourse;
         }
     }
 
@@ -40,9 +50,31 @@ namespace ClassesAndRecords
     {
         public string Name { get; set; }
         public string Author { get; set; }
-    }
 
-    // A record type with 2 properties
-    public record CourseRecord(string Name, string Author);
-    
+        public void Deconstruct(out string name, out string author)
+        {
+            name = Name;
+            author = Author;
+        }
+    }
+    public record CourseRecord(string Name)
+    {
+        // A record type with 2 properties
+        //public record CourseRecord(string name, string author) : this()
+        //{ 
+        //    Name=name;
+        //    Author = author; 
+        //}
+
+       // public string Name { get; init; }
+        public string Author { get; init; }
+        //public string GetTitle()
+        public string Title
+        {
+            get
+            {
+                return $"{Name} - {Author}";
+            }
+        }
+    }
 }
